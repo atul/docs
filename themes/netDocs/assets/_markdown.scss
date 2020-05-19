@@ -3,13 +3,13 @@
 $block-border-radius: 0.15rem;
 
 .markdown {
-  color: $cn-nevada;
+  color: $cn-nevada-gray;
   font-size: 0.882rem;
   line-height: 1.764rem;
   letter-spacing: -0.1px;
 
   h1 {
-    color: $cn-limited-spruce;
+    color: $cn-spruce-gray;
     font-size: 2.235rem;
     font-weight: 300;
     letter-spacing: -0.7px;
@@ -176,12 +176,12 @@ $block-border-radius: 0.15rem;
   }
 
   code {
-    color: $cn-nevada;
+    color: $cn-nevada-gray;
     font-size: .882rem;
     //font-family: 'Oxygen Mono', monospace;
 
     padding: 0 0;
-  //  background: $cn-heather;
+  //  background: $cn-heather-gray;
     border-radius: $block-border-radius;
   }
 
@@ -260,7 +260,7 @@ $block-border-radius: 0.15rem;
 
     tr th, tr td {
       :header{
-        background: $cn-heather;
+        background: $cn-heather-gray;
       }
       padding: $padding-8 $padding-16;
       line-height: 1.5;
@@ -268,7 +268,7 @@ $block-border-radius: 0.15rem;
     }
 
     th {
-      background: $cn-heather;
+      background: $cn-heather-gray;
     }
 
     td { 
@@ -281,17 +281,17 @@ $block-border-radius: 0.15rem;
   }
 
   p code {
-    color: $cn-nevada;
+    color: $cn-nevada-gray;
     background: $code-block-background;
   }
 
   li code {
-    color: $cn-nevada;
+    color: $cn-nevada-gray;
     background: $code-block-background;
   }
 
   td code {
-    color: $cn-nevada;
+    color: $cn-nevada-gray;
     background: $code-block-background;
   }
 
