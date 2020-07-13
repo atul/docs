@@ -184,7 +184,13 @@ You can also enable/disable these Inner header fields:
 - Inner destination port
 - Inner IPv6 flow label
 
-To configure custom hashing, edit the `/usr/lib/python2.7/dist-packages/cumulus/__chip_config/mlx/datapath.conf` file:
+To configure custom hashing:
+
+{{< tabs "TABID01 ">}}
+
+{{< tab "3.7.11 and 3.7.12 ">}}
+
+Edit the `/usr/lib/python2.7/dist-packages/cumulus/__chip_config/mlx/datapath.conf` file:
 
 1. To enable custom hashing, uncomment the `hash_config.enable = true` line.
 2. To enable a field, set the field to `true`. To disable a field, set the field to `false`.
@@ -236,6 +242,55 @@ hash_config.inner_ip6_label = false
 # Hash config end #
 ...
 ```
+
+{{< /tab >}}
+
+{{< tab "3.7.13 and later ">}}
+
+To configure custom hashing, edit the `/etc/cumulus/datapath/traffic.conf` file:
+
+1. To enable custom hashing, uncomment the `hash_config.enable = true` line.
+2. To enable a field, set the field to `true`. To disable a field, set the field to `false`.
+3. Run the `echo 1 > /cumulus/switchd/ctrl/hash_config_reload` command. This command does not cause any traffic interruptions.
+
+The following shows an example `/etc/cumulus/datapath/traffic.conf` file:
+
+```
+cumulus@switch:~$ sudo nano /etc/cumulus/datapath/traffic.conf
+...
+# Uncomment to enable custom fields configured below
+hash_config.enable = true
+
+#hash Fields available ( assign true to enable)
+#ip protocol
+hash_config.ip_prot = true
+#source ip
+hash_config.sip = true
+#destination ip
+hash_config.dip = true
+#source port
+hash_config.sport = false
+#destination port
+hash_config.dport = false
+#ipv6 flow label
+hash_config.ip6_label = true
+#ingress interface
+hash_config.ing_intf = false
+
+#inner fields for  IPv4-over-IPv6 and IPv6-over-IPv6
+hash_config.inner_ip_prot = false
+hash_config.inner_sip = false
+hash_config.inner_dip = false
+hash_config.inner_sport = false
+hash_config.inner_dport = false
+hash_config.inner_ip6_label = false
+# Hash config end #
+...
+```
+
+{{< /tab >}}
+
+{{< /tabs >}}
 
 {{%notice note%}}
 
