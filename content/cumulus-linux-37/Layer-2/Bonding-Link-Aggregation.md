@@ -61,6 +61,10 @@ You can configure the following fields:
 - Destination port
 - Layer 3 protocol
 
+{{< tabs "TABID01 ">}}
+
+{{< tab "3.7.11 and 3.7.12 ">}}
+
 To configure custom hash, edit the `/usr/lib/python2.7/dist-packages/cumulus/__chip_config/mlx/datapath.conf` file:
 
 1. To enable custom hashing, uncomment the `lag_hash_config.enable = true` line.
@@ -94,6 +98,44 @@ lag_hash_config.dport = false
 lag_hash_config.ip_prot = true
 ...
 ```
+
+{{< /tab >}}
+
+{{< tab "3.7.13 and later ">}}
+
+To configure custom hash, edit the `/etc/cumulus/datapath/traffic.conf` file:
+
+1. To enable custom hashing, uncomment the `lag_hash_config.enable = true` line.
+2. To enable a field, set the field to `true`. To disable a field, set the field to `false`.
+3. Run the `echo 1 > /cumulus/switchd/ctrl/hash_config_reload` command. This command does not cause any traffic interruptions.
+
+The following shows an example `/etc/cumulus/datapath/traffic.conf` file:
+
+```
+cumulus@switch:~$ sudo nano /etc/cumulus/datapath/traffic.conf
+...
+#LAG HASH config
+#HASH config for LACP to enable custom fields
+#Fields will be applicable for LAG hash
+#calculation
+#Uncomment to enable custom fields configured below
+lag_hash_config.enable = true
+
+lag_hash_config.smac = true
+lag_hash_config.dmac = true
+lag_hash_config.sip  = true
+lag_hash_config.dip  = true
+lag_hash_config.ether_type = true
+lag_hash_config.vlan_id = true
+lag_hash_config.sport = false
+lag_hash_config.dport = false
+lag_hash_config.ip_prot = true
+...
+```
+
+{{< /tab >}}
+
+{{< /tabs >}}
 
 {{%notice note%}}
 
